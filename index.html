@@ -170,16 +170,6 @@
   .spinner{width:18px;height:18px;border:2.5px solid rgba(122,106,79,.3);
     border-top-color:#C98A1B;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
   @keyframes spin{to{transform:rotate(360deg)}}
-
-  
-  /* 三科小圖區 */
-  .dept-charts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-  @media(max-width:680px){.dept-charts{grid-template-columns:1fr}}
-  .dept-chart-card{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:14px 14px 10px;overflow:hidden}
-  .dept-chart-title{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:6px}
-  .dept-chartbox{position:relative}
-  .dept-chartbox svg{width:100%;display:block}
-  .dept-chartbox .tip{font-size:11px;padding:6px 9px}
   /* 目標線 */
   .target-line{stroke:#E8A020;stroke-width:1.5;stroke-dasharray:5 3}
   .target-cap{fill:#C87010;font-weight:600}
@@ -234,45 +224,18 @@
   <div class="dtiles" id="deptTiles"></div>
 
   
-  <div class="dept-charts">
-    <div class="dept-chart-card">
-      <div class="dept-chart-title">
-        普通科 · 志願一累積
-        <span class="legend" style="float:right;font-weight:400">
-          <span><i class="lg-line lg-now"></i>今年</span>
-          <span><i class="lg-line lg-last"></i>去年</span>
-        </span>
-      </div>
-      <div class="dept-chartbox" id="chartbox2">
-        <svg id="chart2" viewBox="0 0 600 380" preserveAspectRatio="xMidYMid meet"></svg>
-        <div class="tip" id="tip2"></div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title" id="dept2Title">普通科 · 志願一累積</div>
+      <div class="legend">
+        <span><i class="lg-line lg-now"></i>今年 2026</span>
+        <span><i class="lg-line lg-last"></i>去年 2025</span>
+        <span><i class="lg-today"></i>今天 6/23</span>
       </div>
     </div>
-    <div class="dept-chart-card">
-      <div class="dept-chart-title">
-        觀光科 · 志願一累積
-        <span class="legend" style="float:right;font-weight:400">
-          <span><i class="lg-line lg-now"></i>今年</span>
-          <span><i class="lg-line lg-last"></i>去年</span>
-        </span>
-      </div>
-      <div class="dept-chartbox" id="chartbox3">
-        <svg id="chart3" viewBox="0 0 600 380" preserveAspectRatio="xMidYMid meet"></svg>
-        <div class="tip" id="tip3"></div>
-      </div>
-    </div>
-    <div class="dept-chart-card">
-      <div class="dept-chart-title">
-        資管科 · 志願一累積
-        <span class="legend" style="float:right;font-weight:400">
-          <span><i class="lg-line lg-now"></i>今年</span>
-          <span><i class="lg-line lg-last"></i>去年</span>
-        </span>
-      </div>
-      <div class="dept-chartbox" id="chartbox4">
-        <svg id="chart4" viewBox="0 0 600 380" preserveAspectRatio="xMidYMid meet"></svg>
-        <div class="tip" id="tip4"></div>
-      </div>
+    <div class="chartbox" id="chartbox2">
+      <svg id="chart2" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="各科志願一累積折線圖"></svg>
+      <div class="tip" id="tip2"></div>
     </div>
   </div>
 
@@ -487,13 +450,6 @@ const TIP=document.getElementById("tip");
 const BOX=document.getElementById("chartbox");
 const SVG2=document.getElementById("chart2");
 const TIP2=document.getElementById("tip2");
-const BOX2=document.getElementById("chartbox2");
-const SVG3=document.getElementById("chart3");
-const TIP3=document.getElementById("tip3");
-const BOX3=document.getElementById("chartbox3");
-const SVG4=document.getElementById("chart4");
-const TIP4=document.getElementById("tip4");
-const BOX4=document.getElementById("chartbox4");
 let W=1000,H=520, M={t:24,r:54,b:46,l:52};
 let plotW=W-M.l-M.r, plotH=H-M.t-M.b;
 let FS={tick:11,ylab:11,today:11,end:13};
@@ -509,10 +465,7 @@ function layout(){
   FS=MOBILE ? {tick:13,ylab:13,today:13,end:16} : {tick:11,ylab:11,today:11,end:13};
   plotW=W-M.l-M.r; plotH=H-M.t-M.b;
   SVG.setAttribute("viewBox","0 0 "+W+" "+H);
-  // 三科小圖用小一點的 viewBox（依容器寬度）
-  const sw=Math.max(200, (BOX2?BOX2.clientWidth:300)||300);
-  const sh=MOBILE ? Math.round(sw*1.1) : Math.round(sw*0.72);
-  [SVG2,SVG3,SVG4].forEach(s=>s.setAttribute("viewBox","0 0 "+sw+" "+sh));
+  SVG2.setAttribute("viewBox","0 0 "+W+" "+H);
 }
 
 // 各科：依登錄日期累積志願一人數（對齊同一條 AXIS）
@@ -530,7 +483,6 @@ function deptTotal(year,dept,upto){ const s=cumDept(year,dept); return s[upto!=n
 
 let curNow=[], curLast=[], curSchool=null;
 let deptNow=[], deptLast=[], curDept="普通科";
-let deptNow3=[], deptLast3=[], deptNow4=[], deptLast4=[];
 
 function x(i){ return M.l + (AXIS.length<=1?0:(i/(AXIS.length-1))*plotW); }
 function makeYmax(a,b){
@@ -713,25 +665,18 @@ function renderDeptTiles(){
       <div class="dt-cmp">去年同期 ${last}　<span class="delta ${dcls}">${dtxt}</span> ${arrow}</div>
     </button>`;
   }).join("");
-  // 三科圖固定並排顯示，卡片點擊不再切換
-  // （保留 cursor 樣式供未來擴充用）
+  document.querySelectorAll(".dtile").forEach(b=>
+    b.addEventListener("click",()=>setDept(b.dataset.d)));
 }
 
 function setDept(dp){
   curDept=dp;
-  // 固定三張圖各對應一科，不隨點擊切換
-  deptNow =cumDept(2026,"普通科"); deptLast =cumDept(2025,"普通科");
-  deptNow3=cumDept(2026,"觀光科"); deptLast3=cumDept(2025,"觀光科");
-  deptNow4=cumDept(2026,"資管科"); deptLast4=cumDept(2025,"資管科");
-  // layout 可能尚未執行，取得目前容器寬度重設 viewBox
-  const sw=Math.max(200, (BOX2?BOX2.clientWidth:300)||300);
-  const sh=MOBILE ? Math.round(sw*1.1) : Math.round(sw*0.72);
-  [SVG2,SVG3,SVG4].forEach(s=>s.setAttribute("viewBox","0 0 "+sw+" "+sh));
-  drawChart(SVG2,TIP2,deptNow, deptLast, "人");
-  drawChart(SVG3,TIP3,deptNow3,deptLast3,"人");
-  drawChart(SVG4,TIP4,deptNow4,deptLast4,"人");
+  deptNow=cumDept(2026,dp);
+  deptLast=cumDept(2025,dp);
+  document.getElementById("dept2Title").textContent=dp+" · 志願一累積";
+  drawChart(SVG2,TIP2,deptNow,deptLast,"人");
   document.querySelectorAll(".dtile").forEach(b=>{
-    b.classList.remove("on"); b.setAttribute("aria-pressed","false");
+    const on=b.dataset.d===curDept; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on);
   });
 }
 
@@ -742,7 +687,7 @@ loadSheet2026();
 let rT; function onResize(){ clearTimeout(rT); rT=setTimeout(()=>{ layout();
     const tgt2 = (curSchool && TARGETS[curSchool] != null) ? TARGETS[curSchool] : null;
     drawChart(SVG,TIP,curNow,curLast,"張",tgt2);
-    drawChart(SVG2,TIP2,deptNow,deptLast,"人"); drawChart(SVG3,TIP3,deptNow3,deptLast3,"人"); drawChart(SVG4,TIP4,deptNow4,deptLast4,"人"); }, 120); }
+    drawChart(SVG2,TIP2,deptNow,deptLast,"人"); }, 120); }
 window.addEventListener("resize",onResize);
 window.addEventListener("orientationchange",onResize);
 </script>
