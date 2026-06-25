@@ -485,8 +485,8 @@ let curNow=[], curLast=[], curSchool=null;
 let deptNow=[], deptLast=[], curDept="普通科";
 
 function x(i){ return M.l + (AXIS.length<=1?0:(i/(AXIS.length-1))*plotW); }
-function makeYmax(a,b){
-  const mx=Math.max(1, ...a, ...b);
+function makeYmax(a,b,tgt){
+  const mx=Math.max(1, ...a, ...b, tgt||0);
   const step= mx<=20?5: mx<=60?10: mx<=120?20: mx<=240?40:50;
   return Math.ceil(mx/step)*step;
 }
@@ -501,7 +501,7 @@ function monthTicks(){
 
 function drawChart(SVGel, TIPel, nowArr, lastArr, unit, targetVal){
   while(SVGel.firstChild) SVGel.removeChild(SVGel.firstChild);
-  const yMax=makeYmax(nowArr,lastArr);
+  const yMax=makeYmax(nowArr,lastArr,targetVal);
   const y=v=> M.t + plotH - (v/yMax)*plotH;
 
   // y grid + labels
