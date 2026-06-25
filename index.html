@@ -390,6 +390,9 @@ function processRawRows(rows){
   DEPT.daily = DEPT.daily.filter(r=>r.y!==2026).concat(deptAdded);
 }
 
+function showBanner(id){ const el=document.getElementById(id); if(el) el.style.display="flex"; }
+function hideBanner(id){ const el=document.getElementById(id); if(el) el.style.display="none"; }
+
 async function loadSheet2026(){
   if(!SHEET_ID){
     rebuildAxis(); initDashboard(); return;
@@ -660,6 +663,7 @@ function setDept(dp){
 
 // ---------- init ----------
 // 初始化：先載入 Google Sheets 2026 資料，再初始化儀表板
+rebuildAxis(); // 先用 2025 資料建立 AXIS，避免載入期間 NaN
 loadSheet2026();
 let rT; function onResize(){ clearTimeout(rT); rT=setTimeout(()=>{ layout(); drawChart(SVG,TIP,curNow,curLast,"張"); drawChart(SVG2,TIP2,deptNow,deptLast,"人"); }, 120); }
 window.addEventListener("resize",onResize);
