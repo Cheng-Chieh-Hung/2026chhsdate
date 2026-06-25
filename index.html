@@ -244,6 +244,23 @@
     今年資料截止：<b>2026-06-23</b>　·　去年為 2025 完整週期（2/19–8/14）　·　所有數字皆<b>已排除忠信學校直升生</b>，僅計外校報名。<br>
     各科比較不含「英文科」志願（2026 無此志願；2025 約 22 人，未列入三科對比）。
   </footer>
+  <div class="section-divider"><span>面談累積 · 年度對比</span></div>
+  <p class="sub2">依<b>面談完成時間</b>統計每日累積面談人數，排除忠信學校直升生。去年 2025 為完整週期；今年 2026 資料來自 Google 試算表即時更新。</p>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">面談累積人數</div>
+      <div class="legend">
+        <span><i class="lg-line lg-now"></i>今年 2026</span>
+        <span><i class="lg-line lg-last"></i>去年 2025</span>
+        <span><i class="lg-today"></i>今天</span>
+      </div>
+    </div>
+    <div class="chartbox" id="chartbox_iv">
+      <svg id="chart_iv" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="面談累積折線圖"></svg>
+      <div class="tip" id="tip_iv"></div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -254,6 +271,9 @@ const DATA = {"years":[2025,2026],"year_totals":{"2025":293},"md_axis":["02-19",
 // 2025 各科志願一（靜態內嵌，不動）
 // ============================================================
 const DEPT = {"depts":["普通科","觀光科","資管科"],"daily":[{"y":2025,"dept":"普通科","d":"04-12","c":1},{"y":2025,"dept":"普通科","d":"05-13","c":3},{"y":2025,"dept":"普通科","d":"05-17","c":1},{"y":2025,"dept":"普通科","d":"05-19","c":2},{"y":2025,"dept":"普通科","d":"05-21","c":3},{"y":2025,"dept":"普通科","d":"05-24","c":1},{"y":2025,"dept":"普通科","d":"05-27","c":1},{"y":2025,"dept":"普通科","d":"06-03","c":1},{"y":2025,"dept":"普通科","d":"06-04","c":2},{"y":2025,"dept":"普通科","d":"06-06","c":6},{"y":2025,"dept":"普通科","d":"06-07","c":4},{"y":2025,"dept":"普通科","d":"06-08","c":2},{"y":2025,"dept":"普通科","d":"06-09","c":17},{"y":2025,"dept":"普通科","d":"06-10","c":5},{"y":2025,"dept":"普通科","d":"06-11","c":4},{"y":2025,"dept":"普通科","d":"06-12","c":1},{"y":2025,"dept":"普通科","d":"06-13","c":4},{"y":2025,"dept":"普通科","d":"06-14","c":8},{"y":2025,"dept":"普通科","d":"06-15","c":8},{"y":2025,"dept":"普通科","d":"06-16","c":3},{"y":2025,"dept":"普通科","d":"06-17","c":5},{"y":2025,"dept":"普通科","d":"06-18","c":2},{"y":2025,"dept":"普通科","d":"06-19","c":3},{"y":2025,"dept":"普通科","d":"06-20","c":7},{"y":2025,"dept":"普通科","d":"06-21","c":7},{"y":2025,"dept":"普通科","d":"06-22","c":2},{"y":2025,"dept":"普通科","d":"06-23","c":3},{"y":2025,"dept":"普通科","d":"06-24","c":2},{"y":2025,"dept":"普通科","d":"06-25","c":3},{"y":2025,"dept":"普通科","d":"06-29","c":1},{"y":2025,"dept":"普通科","d":"06-30","c":1},{"y":2025,"dept":"普通科","d":"07-01","c":1},{"y":2025,"dept":"普通科","d":"07-05","c":1},{"y":2025,"dept":"普通科","d":"07-07","c":1},{"y":2025,"dept":"普通科","d":"07-08","c":10},{"y":2025,"dept":"普通科","d":"07-09","c":1},{"y":2025,"dept":"普通科","d":"07-10","c":2},{"y":2025,"dept":"普通科","d":"07-11","c":1},{"y":2025,"dept":"普通科","d":"07-23","c":1},{"y":2025,"dept":"普通科","d":"08-06","c":1},{"y":2025,"dept":"普通科","d":"08-14","c":1},{"y":2025,"dept":"觀光科","d":"02-22","c":1},{"y":2025,"dept":"觀光科","d":"02-27","c":1},{"y":2025,"dept":"觀光科","d":"03-22","c":1},{"y":2025,"dept":"觀光科","d":"03-27","c":1},{"y":2025,"dept":"觀光科","d":"03-28","c":1},{"y":2025,"dept":"觀光科","d":"04-01","c":1},{"y":2025,"dept":"觀光科","d":"04-13","c":1},{"y":2025,"dept":"觀光科","d":"04-16","c":1},{"y":2025,"dept":"觀光科","d":"05-01","c":1},{"y":2025,"dept":"觀光科","d":"05-05","c":1},{"y":2025,"dept":"觀光科","d":"05-13","c":1},{"y":2025,"dept":"觀光科","d":"05-26","c":1},{"y":2025,"dept":"觀光科","d":"05-28","c":1},{"y":2025,"dept":"觀光科","d":"06-02","c":1},{"y":2025,"dept":"觀光科","d":"06-06","c":2},{"y":2025,"dept":"觀光科","d":"06-10","c":1},{"y":2025,"dept":"觀光科","d":"06-11","c":1},{"y":2025,"dept":"觀光科","d":"06-14","c":2},{"y":2025,"dept":"觀光科","d":"06-15","c":2},{"y":2025,"dept":"觀光科","d":"06-16","c":1},{"y":2025,"dept":"觀光科","d":"06-21","c":1},{"y":2025,"dept":"觀光科","d":"06-22","c":1},{"y":2025,"dept":"觀光科","d":"06-23","c":1},{"y":2025,"dept":"觀光科","d":"06-24","c":2},{"y":2025,"dept":"觀光科","d":"06-25","c":1},{"y":2025,"dept":"觀光科","d":"07-08","c":8},{"y":2025,"dept":"觀光科","d":"07-09","c":2},{"y":2025,"dept":"觀光科","d":"07-24","c":1},{"y":2025,"dept":"資管科","d":"02-19","c":1},{"y":2025,"dept":"資管科","d":"03-12","c":1},{"y":2025,"dept":"資管科","d":"03-24","c":1},{"y":2025,"dept":"資管科","d":"03-28","c":1},{"y":2025,"dept":"資管科","d":"03-30","c":1},{"y":2025,"dept":"資管科","d":"04-06","c":1},{"y":2025,"dept":"資管科","d":"04-07","c":1},{"y":2025,"dept":"資管科","d":"04-24","c":1},{"y":2025,"dept":"資管科","d":"04-30","c":1},{"y":2025,"dept":"資管科","d":"05-13","c":1},{"y":2025,"dept":"資管科","d":"05-14","c":1},{"y":2025,"dept":"資管科","d":"05-20","c":2},{"y":2025,"dept":"資管科","d":"05-22","c":1},{"y":2025,"dept":"資管科","d":"05-28","c":1},{"y":2025,"dept":"資管科","d":"06-02","c":2},{"y":2025,"dept":"資管科","d":"06-06","c":1},{"y":2025,"dept":"資管科","d":"06-07","c":3},{"y":2025,"dept":"資管科","d":"06-08","c":1},{"y":2025,"dept":"資管科","d":"06-09","c":3},{"y":2025,"dept":"資管科","d":"06-10","c":1},{"y":2025,"dept":"資管科","d":"06-11","c":1},{"y":2025,"dept":"資管科","d":"06-13","c":1},{"y":2025,"dept":"資管科","d":"06-14","c":2},{"y":2025,"dept":"資管科","d":"06-15","c":1},{"y":2025,"dept":"資管科","d":"06-16","c":1},{"y":2025,"dept":"資管科","d":"06-18","c":1},{"y":2025,"dept":"資管科","d":"06-19","c":1},{"y":2025,"dept":"資管科","d":"06-20","c":1},{"y":2025,"dept":"資管科","d":"06-22","c":2},{"y":2025,"dept":"資管科","d":"06-23","c":1},{"y":2025,"dept":"資管科","d":"06-24","c":2},{"y":2025,"dept":"資管科","d":"06-26","c":4},{"y":2025,"dept":"資管科","d":"06-27","c":1},{"y":2025,"dept":"資管科","d":"07-03","c":1},{"y":2025,"dept":"資管科","d":"07-04","c":1},{"y":2025,"dept":"資管科","d":"07-08","c":6},{"y":2025,"dept":"資管科","d":"07-09","c":1}]};
+
+// 2025 面談累積（外校，依面談完成時間）
+const IV2025 = [{"y":2025,"d":"03-08","c":2},{"y":2025,"d":"03-29","c":1},{"y":2025,"d":"04-12","c":5},{"y":2025,"d":"04-16","c":1},{"y":2025,"d":"04-19","c":2},{"y":2025,"d":"04-25","c":3},{"y":2025,"d":"04-26","c":3},{"y":2025,"d":"05-02","c":1},{"y":2025,"d":"05-10","c":2},{"y":2025,"d":"05-14","c":2},{"y":2025,"d":"05-24","c":3},{"y":2025,"d":"05-29","c":1},{"y":2025,"d":"06-07","c":7},{"y":2025,"d":"06-10","c":5},{"y":2025,"d":"06-11","c":5},{"y":2025,"d":"06-13","c":5},{"y":2025,"d":"06-14","c":11},{"y":2025,"d":"06-17","c":3},{"y":2025,"d":"06-18","c":10},{"y":2025,"d":"06-19","c":1},{"y":2025,"d":"06-20","c":6},{"y":2025,"d":"06-21","c":38},{"y":2025,"d":"06-24","c":10},{"y":2025,"d":"06-25","c":4},{"y":2025,"d":"06-28","c":32},{"y":2025,"d":"07-01","c":3},{"y":2025,"d":"07-02","c":1},{"y":2025,"d":"07-04","c":1},{"y":2025,"d":"07-05","c":8},{"y":2025,"d":"07-08","c":22},{"y":2025,"d":"07-09","c":15},{"y":2025,"d":"07-10","c":1},{"y":2025,"d":"07-11","c":1},{"y":2025,"d":"08-05","c":1},{"y":2025,"d":"08-07","c":1}];
 
 // ============================================================
 // 動態 AXIS（2025 預填，載入 2026 後重算）
@@ -308,6 +328,9 @@ const COL_SCHOOL  = "畢業學校";
 const COL_REGSCI  = "普科志願一";
 const COL_VOCSCI  = "職科志願一";
 const COL_SCORE   = "職科國中教育會考對照";
+const COL_IV      = "面談完成時間";
+const COL_CERT    = "已繳交畢業證書";
+const COL_ADMIT   = "初錄科別";
 
 
 function parseCSV(text){
@@ -394,7 +417,22 @@ function processRawRows(rows){
     deptAdded.push({y:2026, dept, d, c});
   }
   DEPT.daily = DEPT.daily.filter(r=>r.y!==2026).concat(deptAdded);
+
+  // 面談累積（依面談完成時間）
+  const ivMap = new Map();
+  for(const row of rows){
+    if((row[COL_SCHOOL]||"").trim() === EXCLUDE_SCH) continue;
+    const iv = (row[COL_IV]||"").trim();
+    if(!iv) continue;
+    const md = parseDateToMD(iv);
+    if(!md || md.length!==5) continue;
+    ivMap.set(md, (ivMap.get(md)||0) + 1);
+  }
+  IV2026 = [...ivMap.entries()].map(([d,c])=>({y:2026,d,c}));
 }
+
+// 2026 面談（processRawRows 後動態更新）
+let IV2026 = [];
 
 function showBanner(id){ const el=document.getElementById(id); if(el) el.style.display="flex"; }
 function hideBanner(id){ const el=document.getElementById(id); if(el) el.style.display="none"; }
@@ -427,6 +465,7 @@ function initDashboard(){
   rebuildAxis();
   layout(); buildSelect(); buildChips(); setSchool(null);
   renderDeptTiles(); setDept(curDept);
+  setInterview();
 }
 
 
@@ -448,6 +487,8 @@ const NS="http://www.w3.org/2000/svg";
 const SVG=document.getElementById("chart");
 const TIP=document.getElementById("tip");
 const BOX=document.getElementById("chartbox");
+const SVG_IV=document.getElementById("chart_iv");
+const TIP_IV=document.getElementById("tip_iv");
 const SVG2=document.getElementById("chart2");
 const TIP2=document.getElementById("tip2");
 let W=1000,H=520, M={t:24,r:54,b:46,l:52};
@@ -466,6 +507,16 @@ function layout(){
   plotW=W-M.l-M.r; plotH=H-M.t-M.b;
   SVG.setAttribute("viewBox","0 0 "+W+" "+H);
   SVG2.setAttribute("viewBox","0 0 "+W+" "+H);
+  SVG_IV.setAttribute("viewBox","0 0 "+W+" "+H);
+}
+
+function cumInterview(yr){
+  const src = yr===2025 ? IV2025 : IV2026;
+  const map = new Map();
+  for(const r of src) map.set(r.d, (map.get(r.d)||0)+r.c);
+  const arr = new Array(AXIS.length).fill(0);
+  for(const [d,c] of map){ const i=IDX.get(d); if(i!=null) arr[i]=c; }
+  let cum=0; return arr.map(v=>(cum+=v,cum));
 }
 
 // 各科：依登錄日期累積志願一人數（對齊同一條 AXIS）
@@ -483,6 +534,7 @@ function deptTotal(year,dept,upto){ const s=cumDept(year,dept); return s[upto!=n
 
 let curNow=[], curLast=[], curSchool=null;
 let deptNow=[], deptLast=[], curDept="普通科";
+let ivNow=[], ivLast=[];
 
 function x(i){ return M.l + (AXIS.length<=1?0:(i/(AXIS.length-1))*plotW); }
 function makeYmax(a,b,tgt){
@@ -687,7 +739,14 @@ loadSheet2026();
 let rT; function onResize(){ clearTimeout(rT); rT=setTimeout(()=>{ layout();
     const tgt2 = (curSchool && TARGETS[curSchool] != null) ? TARGETS[curSchool] : null;
     drawChart(SVG,TIP,curNow,curLast,"張",tgt2);
-    drawChart(SVG2,TIP2,deptNow,deptLast,"人"); }, 120); }
+    drawChart(SVG2,TIP2,deptNow,deptLast,"人");
+    drawChart(SVG_IV,TIP_IV,ivNow,ivLast,"人"); }, 120); }
+function setInterview(){
+  ivNow  = cumInterview(2026);
+  ivLast = cumInterview(2025);
+  drawChart(SVG_IV, TIP_IV, ivNow, ivLast, "人");
+}
+
 window.addEventListener("resize",onResize);
 window.addEventListener("orientationchange",onResize);
 </script>
